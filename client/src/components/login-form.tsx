@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { signInWithGoogle } from "../firebase";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { NotebookText, Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
-import { User } from "firebase/auth";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
+interface ErrorResponse {
+  message: string;
+}
+
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
-  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const currentUser = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (currentUser) {
-      setUser(currentUser);
       navigate("/dashboard/documents")
     }
   }, [currentUser]);
@@ -25,7 +26,6 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
       setLoading(true);
       const userInfo = await signInWithGoogle();
       if (userInfo) {
-        setUser(userInfo.user);
         const res = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/api/user/save`,
           {},
@@ -39,9 +39,10 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
           console.log("User created successfully.");
         }
       }
-    } catch (error: any) {
-      console.error("Login failed:", error);
-      alert(`Login failed: ${error.response?.data?.message || error.message}`);
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorResponse>;
+      console.error("Login failed:", axiosError);
+      alert(`Login failed: ${axiosError.response?.data?.message || axiosError.message}`);
     } finally {
       setLoading(false);
     }

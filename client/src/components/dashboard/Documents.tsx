@@ -1,5 +1,4 @@
-import { Plus, FileText, Clock, Trash2, Edit2, Filter } from "lucide-react";
-import DocumentCard from "./DocumentCard";
+import { Plus, FileText, Trash2, Edit2, Filter } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
