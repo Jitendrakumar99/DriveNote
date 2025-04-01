@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Document background -->
+  <rect x="4" y="4" width="24" height="24" rx="2" fill="#4F46E5"/>
+  
+  <!-- Note lines -->
+  <rect x="8" y="10" width="16" height="2" rx="1" fill="white"/>
+  <rect x="8" y="14" width="12" height="2" rx="1" fill="white"/>
+  <rect x="8" y="18" width="16" height="2" rx="1" fill="white"/>
+  
+  <!-- Pencil icon -->
+  <path d="M20 8L24 12L12 24L8 24L8 20L20 8Z" fill="white"/>
+  <path d="M22 6L26 10L24 12L20 8L22 6Z" fill="#4F46E5"/>
+</svg> 
