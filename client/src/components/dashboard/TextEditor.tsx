@@ -14,6 +14,7 @@ const TextEditor = () => {
   const [fetching, setFetching] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isDraft, setIsDraft] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -50,10 +51,12 @@ const TextEditor = () => {
         console.log("Setting document data:", {
           title: doc.title,
           contentLength: doc.content?.length,
+          isDraft: doc.isDraft
         });
         
         setTitle(doc.title || "");
         setContent(doc.content || "");
+        setIsDraft(doc.isDraft || false);
       }
     } catch (error: any) {
       console.error("Error fetching document:", error);

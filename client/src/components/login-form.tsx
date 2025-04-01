@@ -7,22 +7,23 @@ import { User } from "firebase/auth";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
+export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
+  const currentUser = useAuth();
   const navigate = useNavigate();
-  const { signInWithGoogle: authSignInWithGoogle } = useAuth();
 
   useEffect(() => {
-    if (user) {
+    if (currentUser) {
+      setUser(currentUser);
       navigate("/dashboard/documents")
     }
-  }, [user]);
+  }, [currentUser]);
 
   const handleLogin = async () => {
     try {
       setLoading(true);
-      const userInfo = await authSignInWithGoogle();
+      const userInfo = await signInWithGoogle();
       if (userInfo) {
         setUser(userInfo.user);
         const res = await axios.post(
