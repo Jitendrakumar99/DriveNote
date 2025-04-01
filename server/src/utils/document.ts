@@ -35,9 +35,9 @@ const createFolder = async (folderName: string, accessToken: string) => {
 };
 
 const getOrCreateDocumentsFolder = async (accessToken: string) => {
-  let folderId = await findFolder("DriveNote", accessToken);
+  let folderId = await findFolder("Letters", accessToken);
   if (!folderId) {
-    folderId = await createFolder("DriveNote", accessToken);
+    folderId = await createFolder("Letters", accessToken);
   }
   return folderId;
 };
