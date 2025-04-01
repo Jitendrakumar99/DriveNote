@@ -24,7 +24,7 @@ const PORT = process.env.PORT;
 connectDB();
 
 app.get("/", (req: Request, res: Response) => {
-    res.send({ "message": "Welcome to DriveNote!" })
+    res.send("Welcome to DriveNote yeh Server is running")
 })
 
 app.use("/api/user", userRouter);
